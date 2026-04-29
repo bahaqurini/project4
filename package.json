@@ -1,0 +1,25 @@
+{
+  "name": "feproject",
+  "version": "1.0.0",
+  "description": "Front-End 3 Project",
+  "license": "MIT",
+  "author": "bahaa qurini",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "chai": "^6.2.2",
+    "cypress": "^15.14.1",
+    "eslint": "^10.2.1",
+    "globals": "^17.5.0",
+    "gulp": "^5.0.1",
+    "gulp-cli": "^3.1.0",
+    "mocha": "^11.3.0"
+  },
+  "dependencies": {
+    "gulp-shell": "^0.8.0",
+    "parcel": "^2.16.4"
+  }
+}
