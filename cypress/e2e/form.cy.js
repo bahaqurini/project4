@@ -24,6 +24,14 @@ describe('template spec', () => {
     });
     cy.get('[data-cy="5"]').should('be.visible').should('contain', 'Test Set');
   });
+  it('should not submit the form if the title is empty and show an error message', () => {
+    cy.get('[data-cy="toggle_form"]').click();
+    cy.get('[data-cy="set_form"]').should('be.visible').should('contain', 'Card Set Title')
+    .within(() => {
+      cy.get('input[type="submit"]').should('be.visible').click();
+      cy.get('[data-cy="error_message"]').should('be.visible').should('contain', 'Title is required');
+    }); 
+  });
   it ('should click on a card select it and show the card details and can add cards', () => {
     cy.get('[data-cy="1"]').click();
     cy.get('[data-cy="toggle_form"]').should('be.visible').should('contain', 'Add New Card');
@@ -37,4 +45,13 @@ describe('template spec', () => {
 
   }
   );
-})  
+  it('should show an error message if the term or description is empty when adding a new card', () => {
+    cy.get('[data-cy="1"]').click();
+    cy.get('[data-cy="toggle_form"]').should('be.visible').should('contain', 'Add New Card');
+    cy.get('[data-cy="toggle_form"]').click();
+    cy.get('[data-cy="card_form"]').should('be.visible').within(() => {
+      cy.get('input[type="submit"]').should('be.visible').click();
+      cy.get('[data-cy="error_message"]').should('be.visible').should('contain', 'Term and Description are required');
+    });
+  });
+});

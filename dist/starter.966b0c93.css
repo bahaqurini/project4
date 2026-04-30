@@ -1,6 +1,8 @@
 header {
   cursor: pointer;
+  z-index: 10;
   width: 100px;
+  position: relative;
 }
 
 header h1, nav li {
