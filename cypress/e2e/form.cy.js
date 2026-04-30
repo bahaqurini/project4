@@ -29,18 +29,24 @@ describe('template spec', () => {
     cy.get('[data-cy="set_form"]').should('be.visible').should('contain', 'Card Set Title')
     .within(() => {
       cy.get('input[type="submit"]').should('be.visible').click();
-      cy.get('[data-cy="error_message"]').should('be.visible').should('contain', 'Title is required');
+      cy.contains('TITLE CANNOT BE EMPTY').should('be.visible') ;
     }); 
   });
   it ('should click on a card select it and show the card details and can add cards', () => {
     cy.get('[data-cy="1"]').click();
     cy.get('[data-cy="toggle_form"]').should('be.visible').should('contain', 'Add New Card');
     cy.get('[data-cy="toggle_form"]').click();
-    cy.get('[data-cy="card_form"]').should('be.visible').within(() => {
-      cy.get('[id="termInput"]').type('Test Term');
-      cy.get('input[id="descriptionInput"]').type('Test Description');
-      cy.get('input[type="submit"]').should('be.visible').click();
-    });
+    // the better way to do this is to use the within command to scope the search for the form elements within the card_form element, this way we don't have to repeat the selector for the card_form element multiple times and it makes the test more readable and maintainable.
+    // cy.get('[data-cy="card_form"]').should('be.visible').within(() => {
+    //   cy.get('[id="termInput"]').type('Test Term');
+    //   cy.get('input[id="descriptionInput"]').type('Test Description');
+    //   cy.get('input[type="submit"]').should('be.visible').click();
+    // });
+    // as video show an alternative to the within command we can also use the find command to search for the form elements within the card_form element, this way we can still keep the test readable and maintainable without having to repeat the selector for the card_form element multiple times.
+    cy.get('[data-cy="card_form"]').should('be.visible');
+    cy.get('[data-cy="card_form"]').find('[id="termInput"]').type('Test Term');
+    cy.get('[data-cy="card_form"]').find('input[id="descriptionInput"]').type('Test Description');
+    cy.get('[data-cy="card_form"]').find('input[type="submit"]').should('be.visible').click();
     cy.get('div[class="term"]').should('be.visible').should('contain', 'Test Term');
 
   }
@@ -51,7 +57,17 @@ describe('template spec', () => {
     cy.get('[data-cy="toggle_form"]').click();
     cy.get('[data-cy="card_form"]').should('be.visible').within(() => {
       cy.get('input[type="submit"]').should('be.visible').click();
-      cy.get('[data-cy="error_message"]').should('be.visible').should('contain', 'Term and Description are required');
+      // cy.get('[class="error"]').should('be.visible').should('contain', 'TERM AND DESCRIPTION CANNOT BE EMPTY');
+      cy.contains('TERM AND DESCRIPTION CANNOT BE EMPTY').should('be.visible');
+      cy.get('[id="termInput"]').type('Test Term');
+      cy.get('input[type="submit"]').should('be.visible').click();
+      // cy.get('[class="error"]').should('be.visible').should('contain', 'DESCRIPTION CANNOT BE EMPTY');
+      cy.contains('DESCRIPTION CANNOT BE EMPTY').should('be.visible');
+      cy.get('[id="termInput"]').clear();
+      cy.get('input[id="descriptionInput"]').type('Test Description');
+      cy.get('input[type="submit"]').should('be.visible').click();
+      // cy.get('[class="error"]').should('be.visible').should('contain', 'TERM CANNOT BE EMPTY');
+      cy.contains('TERM CANNOT BE EMPTY').should('be.visible');
     });
   });
 });

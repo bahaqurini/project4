@@ -1,9 +1,27 @@
 {
+  "name": "feproject",
+  "version": "1.0.0",
+  "description": "Front-End 3 Project",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "gulp": "gulp",
+    "build": "gulp build",
+    "serve": "gulp serve",
+    "test": "gulp test",
+    "cypress": "cypress run"
+  },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@parcel/resolver-default": "^2.16.4",
+    "chai": "^4.5.0",
     "cypress": "^15.14.2",
+    "eslint": "^10.2.1",
+    "globals": "^17.5.0",
     "gulp": "^5.0.1",
+    "gulp-cli": "^3.1.0",
     "gulp-shell": "^0.8.0",
+    "mocha": "^11.7.5",
     "parcel": "^2.16.4"
   }
 }

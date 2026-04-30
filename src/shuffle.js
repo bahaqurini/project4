@@ -6,8 +6,8 @@
 // While the function is mostly correct, there are some errors.
 // Use ESLint to identify the errors and Prettier to format the code.
 const shuffle = (cards) => {
-  var current = cards.length
-  var newCardsArray = [...cards]
+  let current = cards.length
+  let newCardsArray = [...cards]
   while (current != 0) {
     let randomIndex = Math.floor(Math.random() * current)
     current--
